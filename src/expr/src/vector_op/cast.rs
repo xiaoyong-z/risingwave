@@ -203,3 +203,19 @@ pub fn bool_to_str(input: bool) -> Result<String> {
         false => Ok("false".into()),
     }
 }
+
+macro_rules! integer_to_bool {
+    ($func_name:ident, $type:ty) => {
+        #[inline(always)]
+        pub fn $func_name(input: $type) -> Result<bool> {
+            match input {
+                0 => Ok(false),
+                _ => Ok(true),
+            }
+        }
+    };
+}
+
+integer_to_bool!(int16_to_bool, i16);
+integer_to_bool!(int32_to_bool, i32);
+integer_to_bool!(int64_to_bool, i64);
